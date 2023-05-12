@@ -95,6 +95,30 @@ const flowString = addKeyword('hola').addAnswer('Este mensaje espera una respuet
 
 ---
 
+## .addAction()
+
+Esta funcion se utliza para ejecutar una acción despues del `addKeyword()`  
+A diferencia de `.addAnwser()`, no cuenta con opciones, ni puede anidar flujos.   
+
+```js  
+// Este ejemplo responde "Hola ¿cómo estas?" usando baileys
+// 
+const flujoBienvenida = addKeyword('hola')
+    .addAction(
+        async(ctx, {provider}) => {  
+            const id = ctx.key.remoteJi  
+            const message = "Hola, ¿Cómo estas?"
+            const a = await provider.getInstance()      
+            await a.sendMessage(id, message)  
+            console.log("Se envio el mensaje")  
+            return
+        }
+    )  
+```  
+
+
+---
+
 ## ctx
 
 Este argumento se utiliza para obtener el contexto de la conversación
